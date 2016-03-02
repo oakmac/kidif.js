@@ -20,7 +20,7 @@ Kidif files are **not** a good data exchange format; please extract the data
 from your kidif files and then transfer it over the wire using something
 appropriate for your application.
 
-Kidif files were inspired by how [chessboard.js stores examples].
+Kidif files were inspired by how [chessboard.js stores examples](https://github.com/oakmac/chessboardjs/tree/master/examples).
 
 ## File Format
 
@@ -88,7 +88,8 @@ the line.
 
 You can disable the camelCase titles, choose not to trim section whitespace, or
 pass a custom delimiter by passing an options argument to the `kidif()`
-function. See the [Usage section] for more information.
+function. See the [Usage section](https://github.com/oakmac/kidif.js#usage) for
+more information.
 
 ## Usage
 
@@ -182,8 +183,4 @@ npm test
 
 ## License
 
-[ISC License]
-
-[chessboard.js stores examples]:https://github.com/oakmac/chessboardjs/tree/master/examples
-[Usage section]:https://github.com/oakmac/kidif.js#usage
-[ISC License]:LICENSE.md
+[ISC License](LICENSE.md)
