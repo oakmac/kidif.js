@@ -81,6 +81,22 @@ const test4Expected = [test4a, test4b];
 const test4Input = kidif('test/tests4/*.test', {trimSections: false});
 
 //------------------------------------------------------------------------------
+// Test 5 - All options at once
+//------------------------------------------------------------------------------
+
+const test5a = {
+  'Foo Bar': '\n\n\nx\n',
+  'Fizzle': 'a\n\nb\n\n'
+};
+
+const test5Expected = [test5a];
+const test5Input = kidif('test/tests5/*.test', {
+  camelCaseTitles: false,
+  delimiter: '~~~',
+  trimSections: false
+});
+
+//------------------------------------------------------------------------------
 // Run the tests
 //------------------------------------------------------------------------------
 
@@ -99,6 +115,10 @@ function testParsing() {
 
   it('trim section whitespace', function() {
     assert.deepEqual(test4Expected, test4Input);
+  });
+
+  it('all options at once', function() {
+    assert.deepEqual(test5Expected, test5Input);
   });
 }
 

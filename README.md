@@ -83,6 +83,9 @@ Produces the following:
 }
 ```
 
+Note that the delimiter for title lines **must** start on the first character of
+the line.
+
 You can disable the camelCase titles, choose not to trim section whitespace, or
 pass a custom delimiter by passing an options argument to the `kidif` function.
 See the [Usage section] for more information.
@@ -108,8 +111,12 @@ support. They are not the solution for every use case.
 
 #### Can I have comments in a kidif file?
 
-Yes, anything above the first section title will be ignored and can be
-considered space for a comment.
+Yes. Anything above the first title line will be ignored.
+
+#### Does kidif execute asynchronously?
+
+No. Everything in kidif happens synchronously. Kidif is designed to be used by
+things like build and test scripts where simplicity trumps speed.
 
 ## Usage
 
@@ -158,7 +165,7 @@ Will produce the following:
 
 ```json
 {
-  "Foo Bar": "\n\n\n\nx",
+  "Foo Bar": "\n\n\nx\n",
   "Fizzle": "a\n\nb\n\n"
 }
 ```
@@ -178,4 +185,5 @@ npm test
 [ISC License]
 
 [chessboard.js stores examples]:https://github.com/oakmac/chessboardjs/tree/master/examples
+[Usage section]:#usage
 [ISC License]:LICENSE.md
