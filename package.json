@@ -1,0 +1,30 @@
+{
+  "author": "Chris Oakman <chris@oakmac.com> (http://chrisoakman.com/)",
+  "name": "kidif",
+  "description": "Store structured data in simple text files.",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oakmac/kidif.js.git"
+  },
+  "main": "kidif.js",
+  "files": [
+    "glob.js",
+    "sync.js",
+    "common.js"
+  ],
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "glob": "7.0.0"
+  },
+  "devDependencies": {
+    "assert": "1.3.0",
+    "mocha": "2.4.5"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "license": "ISC"
+}
