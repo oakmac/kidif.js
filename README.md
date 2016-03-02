@@ -76,7 +76,7 @@ Produces the following:
 ```json
 {
   "lyrics": "Plan the hackathon",
-  "sisters": [
+  "people": [
     "Charles",
     "Lucy"
   ]
