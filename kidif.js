@@ -1,14 +1,10 @@
 // kidif.js - store structured raw text in simple files
-// v0.0.1
+// v1.0.0
 // https://github.com/oakmac/kidif.js
 //
 // Copyright (c) 2016, Chris Oakman
 // Released under the ISC license
 // https://github.com/oakmac/kidif.js/blob/master/LICENSE.md
-
-// TODO:
-// - What happens when the file is not formatted correctly? Is that even possible?
-// - What to do about empty title lines?
 
 // modules
 const fs = require('fs');
