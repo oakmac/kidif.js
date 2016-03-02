@@ -1,9 +1,6 @@
 const assert = require('assert');
 const kidif = require('../kidif.js');
 
-// Things that need to be tested:
-// - trim whitespace vs not
-
 //------------------------------------------------------------------------------
 // Test 1 - Defaults
 //------------------------------------------------------------------------------
