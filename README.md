@@ -1,4 +1,4 @@
-# kidif.js
+# kidif.js [![Build Status](https://travis-ci.org/oakmac/kidif.js.svg?branch=master)](https://travis-ci.org/oakmac/kidif.js)
 
 **K**idif **I**s **D**ata **I**n **F**iles
 
