@@ -55,7 +55,7 @@ section text is trimmed of whitespace.
 A file with repeat titles will convert each section into an array of strings.
 
 ```
-NOTE: any text above the first title line will be ignored
+NOTE: any text above the first title line is treated as a comment and ignored
 
 ===== Activity
 
@@ -87,36 +87,8 @@ Note that the delimiter for title lines **must** start on the first character of
 the line.
 
 You can disable the camelCase titles, choose not to trim section whitespace, or
-pass a custom delimiter by passing an options argument to the `kidif` function.
-See the [Usage section] for more information.
-
-## FAQ
-
-#### Do Kidif files have an character escape sequence?
-
-No. Any line of text that is not a comment or a title line will be treated
-exactly as it is.
-
-#### What should I use as a file extension?
-
-Use a file extension that is appropriate for the content in the file. For
-example, `basic.example` or `filters.test`.
-
-#### What if I need more structure than kidif supports?
-
-Then you probably shouldn't be using kidif files ;)
-
-Serious answer: kidif files are _intentionally_ simple and limited in what they
-support. They are not the solution for every use case.
-
-#### Can I have comments in a kidif file?
-
-Yes. Anything above the first title line will be ignored.
-
-#### Does kidif execute asynchronously?
-
-No. Everything in kidif happens synchronously. Kidif is designed to be used by
-things like build and test scripts where simplicity trumps speed.
+pass a custom delimiter by passing an options argument to the `kidif()`
+function. See the [Usage section] for more information.
 
 ## Usage
 
@@ -170,6 +142,34 @@ Will produce the following:
 }
 ```
 
+## FAQ
+
+#### Do kidif files have a character escape sequence?
+
+No. Any line of text that is not a comment or a title line will be treated
+exactly as it is.
+
+#### What should I use as a file extension?
+
+Use a file extension that is appropriate for the content in the file. For
+example, `basic.example` or `filters.test`.
+
+#### What if I need more structure than a kidif file supports?
+
+Then you probably shouldn't be using kidif files ;)
+
+Serious answer: kidif files are _intentionally_ simple and limited in what they
+support. They are not the solution for every use case.
+
+#### Can I have comments in a kidif file?
+
+Yes. Anything above the first title line will be ignored.
+
+#### Does kidif execute asynchronously?
+
+No. Everything in kidif happens synchronously. Kidif is designed to be used by
+things like build and test scripts where simplicity trumps speed.
+
 ## Development Setup
 
 ```sh
@@ -185,5 +185,5 @@ npm test
 [ISC License]
 
 [chessboard.js stores examples]:https://github.com/oakmac/chessboardjs/tree/master/examples
-[Usage section]:#usage
+[Usage section]:https://github.com/oakmac/kidif.js#usage
 [ISC License]:LICENSE.md
