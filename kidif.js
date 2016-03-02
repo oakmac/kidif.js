@@ -6,8 +6,9 @@
 // Released under the ISC license
 // https://github.com/oakmac/kidif.js/blob/master/LICENSE.md
 
-// TODO: what happens when the file is not formatted correctly?
-//       is that even possible?
+// TODO:
+// - What happens when the file is not formatted correctly? Is that even possible?
+// - What to do about empty title lines?
 
 // modules
 const fs = require('fs');
@@ -129,7 +130,9 @@ function parseFile(file, options) {
     }
 
     // drop this line if we have not found the first title yet
-    if (currentTitle === false) continue;
+    if (currentTitle === false) {
+      continue;
+    }
 
     // append this line to the current section
     if (typeof result[currentTitle] === 'string') {

@@ -1,10 +1,10 @@
 # kidif.js [![Build Status](https://travis-ci.org/oakmac/kidif.js.svg?branch=master)](https://travis-ci.org/oakmac/kidif.js)
 
-**K**idif **I**s **D**ata **I**n **F**iles
+> **K**idif **I**s **D**ata **I**n **F**iles
 
-Kidif files are a way to store structured data when you need raw strings.
+Kidif files are a simple way to store structured data when you need raw strings.
 
-## Tell me more!
+## Rationale
 
 Most data formats (JSON, EDN, YAML, etc) have special escape rules for strings,
 making them difficult to write and edit when you care about raw, unescaped text.
@@ -24,7 +24,7 @@ Kidif files were inspired by how [chessboard.js stores examples].
 
 ## File Format
 
-Kidif files consist of only two things: **titles** and **sections**
+Kidif files consist of only three things: **comments**, **titles**, and **sections**
 
 A quick example:
 
@@ -52,24 +52,22 @@ When parsed by kidif, this file will produce the following JavaScript Object
 Notice that by default, the section titles are converted to camelCase and the
 section text is trimmed of whitespace.
 
-TODO: show example using options
-
 A file with repeat titles will convert each section into an array of strings.
 
 ```
 NOTE: any text above the first title line will be ignored
 
-===== Lyrics
+===== Activity
 
-The snow glows white on the mountain tonight, not a footprint to be seen.
+Plan the hackathon
 
-===== Sisters
+===== People
 
-Anna
+Charles
 
-===== Sisters
+===== People
 
-Elsa
+Lucy
 
 ```
 
@@ -77,25 +75,36 @@ Produces the following:
 
 ```json
 {
-  "lyrics": "The snow glows white on the mountain tonight, not a footprint to be seen.",
+  "lyrics": "Plan the hackathon",
   "sisters": [
-    "Anna",
-    "Elsa"
+    "Charles",
+    "Lucy"
   ]
 }
 ```
 
-TODO: show an example showing escaped strings
+You can disable the camelCase titles, choose not to trim section whitespace, or
+pass a custom delimiter by passing an options argument to the `kidif` function.
+See the [Usage section] for more information.
 
 ## FAQ
 
+#### Do Kidif files have an character escape sequence?
+
+No. Any line of text that is not a comment or a title line will be treated
+exactly as it is.
+
 #### What should I use as a file extension?
 
-TODO: write this
+Use a file extension that is appropriate for the content in the file. For
+example, `basic.example` or `filters.test`.
 
 #### What if I need more structure than kidif supports?
 
-TODO: write this
+Then you probably shouldn't be using kidif files ;)
+
+Serious answer: kidif files are _intentionally_ simple and limited in what they
+support. They are not the solution for every use case.
 
 #### Can I have comments in a kidif file?
 
@@ -111,22 +120,58 @@ var kidif = require('kidif');
 
 // the first argument to kidif() should be a glob string; it is passed
 // directly to the node-glob library: https://github.com/isaacs/node-glob
-var myExamples = kidif.parse('examples/*.exmpl');
+var myExamples = kidif('examples/*.example');
 
 console.log(myExamples); // prints your examples
 ```
 
-## API
+You can optionally pass a JavaScript Object as a second argument:
 
-TODO: expand on this section
-
-* `camelCaseTitles`: boolean, default is `true`, will convert titles to `camelCase` strings
+* `camelCaseTitles`: boolean, default is `true`, will convert titles to camelCase strings
 * `delimiter`: string, default is `=====`, the string to use as a title delimiter
-* `trimSections`: boolean, default is `true`
+* `trimSections`: boolean, default is `true`, will trim all the whitespace in sections
+
+An example with options:
+
+```
+~~~ Foo Bar
+
+
+
+x
+~~~ Fizzle
+a
+
+b
+
+```
+
+```js
+var examples2 = kidif('examples2/*.example', {
+  camelCaseTitles: false,
+  delimiter: '~~~',
+  trimSections: false
+});
+```
+
+Will produce the following:
+
+```json
+{
+  "Foo Bar": "\n\n\n\nx",
+  "Fizzle": "a\n\nb\n\n"
+}
+```
 
 ## Development Setup
 
-TODO: write this section
+```sh
+# install node_modules
+npm install
+
+# run the tests
+npm test
+```
 
 ## License
 
