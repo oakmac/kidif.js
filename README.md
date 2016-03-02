@@ -57,6 +57,8 @@ TODO: show example using options
 A file with repeat titles will convert each section into an array of strings.
 
 ```
+NOTE: any text above the first title line will be ignored
+
 ===== Lyrics
 
 The snow glows white on the mountain tonight, not a footprint to be seen.
@@ -87,11 +89,18 @@ TODO: show an example showing escaped strings
 
 ## FAQ
 
-TODO: write this section
+#### What should I use as a file extension?
 
-What should I use as a file extension?
+TODO: write this
 
-What if I need more structure than kidif supports?
+#### What if I need more structure than kidif supports?
+
+TODO: write this
+
+#### Can I have comments in a kidif file?
+
+Yes, anything above the first section title will be ignored and can be
+considered space for a comment.
 
 ## Usage
 

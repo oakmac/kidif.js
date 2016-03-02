@@ -2,22 +2,22 @@ const assert = require('assert');
 const kidif = require('../kidif.js');
 
 // Things that need to be tested:
-// - default parse with no options
-// - repeat titles that get turned into arrays
-// - custom delimeter values
-// - camelCase conversion
 // - trim whitespace vs not
 
-const ex1a = {
+//------------------------------------------------------------------------------
+// Test 1 - Defaults
+//------------------------------------------------------------------------------
+
+const test1a = {
   alphaBravo: 'charlie delta\necho foxtrot'
 };
 
-const ex1b = {
+const test1b = {
   alphaBravo: 'one two\n   three four',
   sierraTango: 'VICTOR WHISKEY'
 };
 
-const ex1c = {
+const test1c = {
   alphaBravo: [
     'one two\n   three four',
     'fizzle'
@@ -29,17 +29,77 @@ const ex1c = {
   charlieDelta: 'Echo Golf'
 };
 
-const ex1Expected = [ex1a, ex1b, ex1c];
-const ex1Input = kidif('test/ex1/*.test');
+const test1Expected = [test1a, test1b, test1c];
+const test1Input = kidif('test/tests1/*.test');
+
+//------------------------------------------------------------------------------
+// Test 2 - Custom Delimiter
+//------------------------------------------------------------------------------
+
+const test2a = {
+  alphaBravo: 'charlie delta\necho foxtrot'
+};
+
+const test2b = {
+  alphaBravo: 'one two\n   three four',
+  sierraTango: 'VICTOR WHISKEY'
+};
+
+const test2Expected = [test2a, test2b];
+const test2Input = kidif('test/tests2/*.test', {delimiter: '~~~~'});
+
+//------------------------------------------------------------------------------
+// Test 3 - Camel Case Conversion
+//------------------------------------------------------------------------------
+
+const test3a = {
+  'Alpha Bravo': 'charlie delta\necho foxtrot'
+};
+
+const test3b = {
+  'Alpha Bravo': 'one two\n   three four',
+  'Sierra Tango': 'VICTOR WHISKEY'
+};
+
+const test3Expected = [test3a, test3b];
+const test3Input = kidif('test/tests3/*.test', {camelCaseTitles: false});
+
+//------------------------------------------------------------------------------
+// Test 4 - Trimming whitespace
+//------------------------------------------------------------------------------
+
+const test4a = {
+  alphaBravo: '\ncharlie delta\necho foxtrot\n\n'
+};
+
+const test4b = {
+  alphaBravo: '\none two\n   three four\n\n\n\n\n\n\n',
+  sierraTango: '\nVICTOR WHISKEY\n\n'
+};
+
+const test4Expected = [test4a, test4b];
+const test4Input = kidif('test/tests4/*.test', {trimSections: false});
+
+//------------------------------------------------------------------------------
+// Run the tests
+//------------------------------------------------------------------------------
 
 function testParsing() {
   it('defaults', function() {
-    assert.deepEqual(ex1Expected, ex1Input);
+    assert.deepEqual(test1Expected, test1Input);
   });
 
-  // it('with options', function() {
-  //   assert.deepEqual(z, z);
-  // });
+  it('custom delimiter', function() {
+    assert.deepEqual(test2Expected, test2Input);
+  });
+
+  it('camelCase conversion', function() {
+    assert.deepEqual(test3Expected, test3Input);
+  });
+
+  it('trim section whitespace', function() {
+    assert.deepEqual(test4Expected, test4Input);
+  });
 }
 
 describe('kidif parsing', testParsing);
