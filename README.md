@@ -93,7 +93,7 @@ more information.
 
 ## Usage
 
-Basic usage:
+The kidif module exports a single function:
 
 ```js
 var kidif = require('kidif');
@@ -102,16 +102,18 @@ var kidif = require('kidif');
 // directly to the node-glob library: https://github.com/isaacs/node-glob
 var myExamples = kidif('examples/*.example');
 
-console.log(myExamples); // prints your examples
+// prints an array of your examples
+console.log(myExamples);
 ```
 
-You can optionally pass a JavaScript Object as a second argument:
+You can optionally pass a JavaScript Object as a second argument with the
+following properties:
 
 * `camelCaseTitles`: boolean, default is `true`, will convert titles to camelCase strings
-* `delimiter`: string, default is `=====`, the string to use as a title delimiter
+* `delimiter`: string, default is `'====='`, the string to use as a title delimiter
 * `trimSections`: boolean, default is `true`, will trim all the whitespace in sections
 
-An example with options:
+An example file:
 
 ```
 ~~~ Foo Bar
@@ -125,6 +127,8 @@ a
 b
 
 ```
+
+JavaScript:
 
 ```js
 var examples2 = kidif('examples2/*.example', {
