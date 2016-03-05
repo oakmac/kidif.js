@@ -13,7 +13,7 @@ Kidif files are well-suited to things like examples or test cases where you want
 to use existing text-management tools (git, file system, etc), but store raw
 text in a structured way.
 
-Kidif files are designed to be *simple*. The idea is simple, the format is
+Kidif files are designed to be **simple**. The idea is simple, the format is
 simple, and the parser is simple.
 
 Kidif files are **not** a good data exchange format; please extract the data
@@ -26,7 +26,7 @@ Kidif files were inspired by how [chessboard.js stores examples](https://github.
 
 Kidif files consist of only three things: **comments**, **titles**, and **sections**
 
-A quick example:
+A basic example:
 
 ```
 ===== Foo
@@ -83,13 +83,63 @@ Produces the following:
 }
 ```
 
-Note that the delimiter for title lines **must** start on the first character of
-the line.
+The delimiter for title lines must start on the first character of the line and
+the line must contain some text in addition to the delimiter string. In other
+words, you cannot have an empty title.
 
-You can disable the camelCase titles, choose not to trim section whitespace, or
-pass a custom delimiter by passing an options argument to the `kidif()`
-function. See the [Usage section](https://github.com/oakmac/kidif.js#usage) for
-more information.
+Here is a more realistic example of what you might store in a kidif file:
+
+```
+This example should demonstrate the onChange and onDestroy events.
+
+===== Description
+
+The Foo widget has `onChange` and `onDestroy` events you can hook into for
+custom functionality.
+
+===== HTML
+
+<div id="fooContainer"></div>
+
+===== CSS
+
+#fooContainer {
+  background: #eee;
+  height: 400px;
+  width: 600px;
+}
+
+===== JavaScript
+
+function onChangeMyFoo(oldState, newState) {
+  // potentially modify the new state here...
+  return newState;
+}
+
+function onDestroyMyFoo(containerEl) {
+  // execute any necessary cleanup code here
+}
+
+var myFoo = Foo('fooContainer', {
+  allowFlip: true,
+  onChange: onChangeMyFoo,
+  onDestroy: onDestroyMyFoo
+});
+
+myFoo.init();
+```
+
+Will produce the following JSON that can be used to build an example HTML page
+from a template:
+
+```json
+{
+  "css": "#fooContainer {\n  background: #eee;\n  height: 400px;\n  width: 600px;\n}",
+  "description": "The Foo widget has `onChange` and `onDestroy` events you can hook into for\ncustom functionality.",
+  "html": "<div id=\"fooContainer\"></div>",
+  "javascript": "function onChangeMyFoo(oldState, newState) {\n  // potentially modify the new state here...\n  return newState;\n}\n\nfunction onDestroyMyFoo(containerEl) {\n  // execute any necessary cleanup code here\n}\n\nvar myFoo = Foo('fooContainer', {\n  allowFlip: true,\n  onChange: onChangeMyFoo,\n  onDestroy: onDestroyMyFoo\n});\n\nmyFoo.init();"
+}
+```
 
 ## Usage
 
@@ -110,7 +160,7 @@ You can optionally pass a JavaScript Object as a second argument with the
 following properties:
 
 * `camelCaseTitles`: boolean, default is `true`, will convert titles to camelCase strings
-* `delimiter`: string, default is `'====='`, the string to use as a title delimiter
+* `delimiter`: string, default is `'====='`, the string to use as a title line delimiter
 * `trimSections`: boolean, default is `true`, will trim all the whitespace in sections
 
 An example file:
@@ -157,7 +207,7 @@ exactly as it is.
 #### What should I use as a file extension?
 
 Use a file extension that is appropriate for the content in the file. For
-example, `basic.example` or `filters.test`.
+example, `.example` or `.test`.
 
 #### What if I need more structure than a kidif file supports?
 

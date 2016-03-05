@@ -1,5 +1,5 @@
 // kidif.js - store structured raw text in simple files
-// v1.0.0
+// v1.1.0
 // https://github.com/oakmac/kidif.js
 //
 // Copyright (c) 2016, Chris Oakman
@@ -38,7 +38,9 @@ function toCamelCase(str) {
 }
 
 function isTitleLine(line, delim) {
-  return line.substring(0, delim.length) === delim;
+  return line.substring(0, delim.length) === delim &&
+         trim(line) !== delim; // title lines must contain some text other than
+                               // the delimiter
 }
 
 function trimSections(result) {
