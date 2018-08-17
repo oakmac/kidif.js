@@ -216,6 +216,8 @@ Then you probably shouldn't be using kidif files ;)
 Serious answer: kidif files are _intentionally_ simple and limited in what they
 support. They are not the solution for every use case.
 
+[eno](https://eno-lang.org/) is a similar idea with support for more complex data than kidif.
+
 #### Can I have comments in a kidif file?
 
 Yes. Anything above the first title line will be ignored.
